@@ -1,0 +1,7 @@
+#!/usr/bin/perl
+#system("f77 -m32 -c lqgenep_orig.f");
+system("f77 -m32 -c lqgenep.f");
+#system("f77 -m32 -c lqgenep_EIC.f");
+#system("f77 -m32 -o LQguser LQguser.f lqgenep_orig.o ./extrafiles/pythia6156.o -L./extrafiles -lpdflib804 -lpacklib_noshift -lmathlib");
+system("f77 -m32 -o LQguser LQguser.f lqgenep.o ./extrafiles/pythia6156.o -L./extrafiles -lpdflib804 -lpacklib_noshift -lmathlib");
+#system("f77 -m32 -o LQguser LQguser.f lqgenep_EIC.o ./extrafiles/pythia6156.o -L./extrafiles -lpdflib804 -lpacklib_noshift -lmathlib");

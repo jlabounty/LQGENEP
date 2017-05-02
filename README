@@ -1,0 +1,90 @@
+Update 08/11/2010  -> Last instructions to run the program:
+===========================================================
+
+Needed cern library and pythia files:
+pythia6156.f 
+/cern/pro/lib/libpdflib804.a
+/cern/pro/lib/libpacklib_noshift.a
+/cern/pro/lib/libmathlib.a
+
+All the above files have been also added to the subdirectory "extrafiles"
+The package have been tested and works for Scientific Linux SL 5.3 Architecture i686
+
+Instructions:
+1) -> tar -zxvf lqgenep.tgz   
+
+2) compile pythia:
+   -> cd extrafiles
+   -> f77 -c pythia6156.f  
+
+3) compile lqgenep
+   -> cd ..
+   -> f77 -c lqgenep.f      
+
+3) link and produce executable
+   -> f77 -o LQguser LQguser.f lqgenep.o ./extrafiles/pythia6156.o //
+      -L./extrafiles -lpdflib804 -lpacklib_noshift -lmathlib
+4) run
+   -> ./LQguser
+#--------------
+# File: README
+#--------------
+
+List of files in the distribution:
+
+- README (this file)
+- lqgenep.f (source code file)
+- LQguser.f (example of user generation program)
+- LQguser.log (output file of the example user program)
+
+
+
+Instructions to produce and test an executable
+==============================================
+
+1) producing the LQGENEP object file
+------------------------------------
+f77 -c lqgenep.f 
+
+
+2) producing the test executable using LQguser.f on different platforms
+-----------------------------------------------------------------------
+  - to produce the executable the following libraries
+    are needed (the library path of the standard CERNLIB 
+    installation is used):
+               /cern/pro/lib/libpacklib.a (PACKLIB)
+               /cern/pro/lib/libmathlib.a (MATHLIB)
+               /cern/pro/lib/libpdflib.a  (PDFLIB)
+               /cern/pro/lib/libpythia6156.a  (PYTHIA 6.156)
+               eventually the updated pythia source can be obtained from 
+               the PYTHIA (and JETSET) webpage:  
+               http://www.thep.lu.se/~torbjorn/Pythia.html
+
+ -  producing executable LQguser on 
+    OS: OSF1
+    version:V4.0
+    platform: alpha
+    ------------------------------------------>
+f77 -o LQguser LQguser.f lqgenep.o -L/cern/pro/lib -lpdflib -lpacklib -lmathlib 
+-lpythia6156
+
+
+ -  producing executable LQguser on 
+    OS: SunOS 
+    version: 5.5.1
+    platform: SUNW,SPARCstation-20
+    ------------------------------------------>
+f77 -o LQguser LQguser.f lqgenep.o -L/cern/pro/lib -lpythia6156 -lpdflib 
+-lmathlib -lpacklib -lw -lgen -lsocket -lnsl -lintl 
+
+
+ -  producing executable LQguser on 
+    OS: Linux
+    version: 2.2.12-20
+    platform: i586
+    ------------------------------------------>
+f77 -o LQguser LQguser.f lqgenep.o -L/cern/pro/lib -lpdflib -lpacklib -lmathlib 
+-lpythia6156
+
+
+
